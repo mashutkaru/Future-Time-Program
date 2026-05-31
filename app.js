@@ -1,3 +1,23 @@
+const iconSvg = (inner, { fill = false } = {}) =>
+  `<svg class="hi-icon-svg" viewBox="0 0 24 24" aria-hidden="true"${
+    fill
+      ? ' fill="currentColor"'
+      : ' fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"'
+  }>${inner}</svg>`;
+
+const ICONS = {
+  plane: iconSvg(
+    '<path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>',
+    { fill: true }
+  ),
+  coffee: iconSvg(
+    '<path d="M6 8h11v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z"/><path d="M17 8h1a3 3 0 0 1 0 6h-1"/><path d="M6 4v4"/><path d="M10 4v4"/><path d="M14 4v4"/>'
+  ),
+  suitcase: iconSvg(
+    '<rect x="4" y="9" width="16" height="11" rx="2"/><path d="M9 9V7a3 3 0 0 1 6 0v2"/><path d="M12 14v3"/>'
+  ),
+};
+
 const days = [
   {
     w: "TUE",
@@ -8,9 +28,9 @@ const days = [
     theme: "Start of the delegation journey.",
     tip: "Keep passport, insurance and headphones close.",
     items: [
-      ["ARRIVAL", "Departure from TLV and group briefing.", "✈"],
+      ["ARRIVAL", "Departure from TLV and group briefing.", ICONS.plane],
       ["CHECK-IN", "Airport check-in and travel setup.", "▦"],
-      ["WELCOME", "Group alignment before the flight.", "☕"],
+      ["WELCOME", "Group alignment before the flight.", ICONS.coffee],
       ["OVERNIGHT", "Overnight flight to Japan.", "☾"],
     ],
     program: [
@@ -27,7 +47,7 @@ const days = [
     theme: "Landing, orientation and first evening.",
     tip: "Stay with the group after landing and keep luggage tagged.",
     items: [
-      ["ARRIVAL", "Pick up from Narita Airport.", "✈"],
+      ["ARRIVAL", "Pick up from Narita Airport.", ICONS.plane],
       ["CHECK-IN", "Arrival to hotel and rest.", "▦"],
       ["DINNER", "Free dinner near the hotel.", "♨"],
       ["OVERNIGHT", "Overnight in Tokyo.", "☾"],
@@ -90,7 +110,7 @@ const days = [
     items: [
       ["TOURING", "Tourist / cultural day in Tokyo.", "⌖"],
       ["CULTURE", "Urban flow and public behavior.", "✦"],
-      ["SOCIAL EVENING", "Group evening / lecture.", "☕"],
+      ["SOCIAL EVENING", "Group evening / lecture.", ICONS.coffee],
       ["RETURN", "Return to hotel TBD.", "▤"],
     ],
     program: [
@@ -167,8 +187,8 @@ const days = [
     tip: "Write one concrete action you will take after returning.",
     items: [
       ["SUMMARY", "Closing reflection.", "✦"],
-      ["CHECKOUT", "Luggage and checkout.", "🧳"],
-      ["AIRPORT", "Bus to airport.", "✈"],
+      ["CHECKOUT", "Luggage and checkout.", ICONS.suitcase],
+      ["AIRPORT", "Bus to airport.", ICONS.plane],
       ["FLIGHT", "Return home.", "☾"],
     ],
     program: [

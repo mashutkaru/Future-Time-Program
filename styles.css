@@ -439,6 +439,13 @@ main {
   margin-bottom: 12px;
   color: var(--navy-2);
   font-size: 36px;
+  line-height: 1;
+}
+
+.hi-icon-svg {
+  display: block;
+  width: 36px;
+  height: 36px;
 }
 
 .highlight h3 {
