@@ -66,6 +66,15 @@
               <section class="day-section" id="section-location">
                 <h3 class="day-section-title">Location</h3>
                 <p class="day-section-body" id="dayLocation"></p>
+                <div class="day-map-frame" id="dayLocationMap" hidden>
+                  <iframe
+                    class="day-map-embed"
+                    title="Day location map"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
               </section>
 
               <section class="day-section" id="section-notes">
@@ -128,6 +137,15 @@
                 <section class="m-block m-section" id="m-section-location">
                   <h3>Location</h3>
                   <p class="m-section-body" id="mLocation"></p>
+                  <div class="day-map-frame day-map-frame--mobile" id="mLocationMap" hidden>
+                    <iframe
+                      class="day-map-embed"
+                      title="Day location map"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
                 </section>
 
                 <section class="m-block m-section" id="m-section-notes">
@@ -187,7 +205,7 @@
           <div class="subhead">
             <div>
               <h2>Map</h2>
-              <p>Central Tokyo — Ginza, Shinagawa, Meguro and nearby areas.</p>
+              <p>Delegation hotel — Shinagawa Prince Hotel (品川プリンスホテル).</p>
             </div>
             <button class="back" data-page="day" type="button">Back to day program</button>
           </div>
@@ -195,8 +213,8 @@
           <div class="map-frame">
             <iframe
               class="map-embed"
-              title="Map of central Tokyo"
-              src="https://www.google.com/maps?q=35.652,139.735&hl=en&z=13&output=embed"
+              title="Shinagawa Prince Hotel"
+              src="https://www.google.com/maps?q=35.6279119,139.7367526&hl=en&z=16&output=embed"
               allowfullscreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
@@ -230,6 +248,15 @@
           </div>
 
           <div class="grid">
+            <div class="guide-card">
+              <h3>Delegation hotel</h3>
+              <p>
+                Shinagawa Prince Hotel<br />
+                品川プリンスホテル<br />
+                <a href="https://maps.app.goo.gl/i9wZU4pj519VPV3u5" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+              </p>
+            </div>
+
             <div class="guide-card">
               <h3>Program lead</h3>
               <p>+81 90-1234-5678</p>
