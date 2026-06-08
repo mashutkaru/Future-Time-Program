@@ -320,8 +320,12 @@ const dayPhotos = {
 };
 
 const dayMaps = {
-  "Tokyo municipalities & innovation": {
+  "Arrival in Tokyo": {
     src: "https://www.google.com/maps/d/embed?mid=1KgNu-E3PTu-8eC-OTNJ8IM7su6szrT8&ehbc=2E312F",
+    title: "July 8 Wednesday",
+  },
+  "Tokyo municipalities & innovation": {
+    src: "https://www.google.com/maps/d/embed?mid=1bb008A8_D0OJe2mofNKqRvb-oQ0z26w",
     title: "July 9 Thursday",
   },
   "Saitama community systems": {
@@ -369,6 +373,7 @@ function runTests() {
   console.assert(Boolean(dayMaps[days[6].title]), "Day 13.7 should have a map");
   console.assert(Boolean(dayMaps[days[7].title]), "Day 14.7 should have a map");
   console.assert(Boolean(dayMaps[days[8].title]), "Day 15.7 should have a map");
+  console.assert(Boolean(dayMaps[days[1].title]), "Day 8.7 should have a map");
   console.assert(prep.length >= 1 && avoid.length >= 1, "Preparation and avoid pages should have content");
   ["overview", "schedule", "location", "notes", "tips"].forEach((name) => {
     console.assert(Boolean(byId(`section-${name}`)), `Missing #section-${name}`);
