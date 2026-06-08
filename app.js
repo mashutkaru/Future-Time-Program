@@ -314,14 +314,14 @@ const avoid = [
 ];
 
 const dayPhotos = {
-  "Departure from Israel": "./assets/day-7-7.png",
+  "Departure from Israel": "./images/japan_7.7",
   "Arrival in Tokyo": "./assets/tokyo-tower-evening.png",
   "Summary + departure": "./assets/day-15-7.png",
 };
 
 const dayMaps = {
   "Tokyo municipalities & innovation": {
-    src: "https://www.google.com/maps/d/embed?mid=1bb008A8_D0OJe2mofNKqRvb-oQ0z26w",
+    src: "https://www.google.com/maps/d/embed?mid=1KgNu-E3PTu-8eC-OTNJ8IM7su6szrT8&ehbc=2E312F",
     title: "July 9 Thursday",
   },
   "Saitama community systems": {
