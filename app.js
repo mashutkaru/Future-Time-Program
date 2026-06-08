@@ -21,7 +21,7 @@ const ICONS = {
     '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'
   ),
   transfer: iconSvg(
-    '<path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.5"/><path d="m17 18 3-3-3-3"/><path d="M5 18l-3-3 3-3"/><circle cx="8" cy="18" r="2"/><circle cx="16" cy="18" r="2"/>'
+    '<path d="M4 6h16a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/><path d="M4 11h16"/><path d="M8 6V4"/><path d="M16 6V4"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>'
   ),
   dinner: iconSvg(
     '<path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6h1v8"/>'
@@ -149,12 +149,18 @@ const days = [
       ["10:30–12:00", "Minato City Hall", "Office visit"],
       ["12:00", "Lunch", "Diet Members' Cafeteria, House of Representatives Main Building (衆議院 本館議員食堂)"],
       ["13:30–14:30", "Minato-ku Sports Center", "Site visit"],
-      ["15:00", "Panel discussion with Gov. Officials", "Tokyo Metropolitan Government — simultaneous translation"],
-      ["15:00", "Keynote lecture (30 min)", "Policy Design and Governance Challenges in Super-Aging Societies"],
-      ["Panel 1", "Governance, Workforce, and Policy Coordination", "Japan–Israel comparative perspectives (25 min)"],
-      ["Break", "Coffee break", "10 min"],
-      ["Panel 2", "Prevention, Independence Support, and Care Models", "Japan–Israel comparative perspectives (25 min)"],
-      ["Roundtable", "Interactive exchange", "Japanese and Israeli participants, policymakers, researchers & practitioners (40 min)"],
+      [
+        "15:00–18:00",
+        "Panel discussion with Government officials",
+        "Tokyo Metropolitan Government — simultaneous translation",
+        [
+          ["15:00", "Keynote lecture (30 min)", "Policy Design and Governance Challenges in Super-Aging Societies"],
+          ["Panel 1", "Governance, Workforce, and Policy Coordination", "Japan–Israel comparative perspectives (25 min)"],
+          ["Break", "Coffee break", "10 min"],
+          ["Panel 2", "Prevention, Independence Support, and Care Models", "Japan–Israel comparative perspectives (25 min)"],
+          ["Roundtable", "Interactive exchange", "Japanese and Israeli participants, policymakers, researchers & practitioners (40 min)"],
+        ],
+      ],
     ],
   },
   {
@@ -325,7 +331,7 @@ const dayMaps = {
     title: "July 8 Wednesday",
   },
   "Tokyo municipalities & innovation": {
-    src: "https://www.google.com/maps/d/embed?mid=1bb008A8_D0OJe2mofNKqRvb-oQ0z26w",
+    src: "https://www.google.com/maps/d/embed?mid=1bb008A8_D0OJe2mofNKqRvb-oQ0z26w&ehbc=2E312F",
     title: "July 9 Thursday",
   },
   "Saitama community systems": {
@@ -434,6 +440,59 @@ function renderDayMap(frameId, day) {
   }
 }
 
+function renderSchedulePlan(plan) {
+  if (!Array.isArray(plan) || plan.length === 0) return "";
+
+  return `
+    <div class="timeline-plan">
+      ${plan
+        .map(
+          ([time, title, label]) => `
+            <div class="timeline-plan-row">
+              <div class="timeline-plan-time">${time}</div>
+              <div class="timeline-plan-body">
+                <strong>${title}</strong>
+                <p>${label}</p>
+              </div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderScheduleEntry(entry, { mobile = false } = {}) {
+  const [time, title, label, plan] = entry;
+  const planHtml = renderSchedulePlan(plan);
+
+  if (mobile) {
+    return `
+      <div class="timeline-row mobile-timeline-row${plan ? " timeline-row--group" : ""}">
+        <div class="time">${time}</div>
+        <div>
+          <h4>${title}</h4>
+          <p>${label}</p>
+          ${planHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="timeline-row${plan ? " timeline-row--group" : ""}">
+      <div class="time">${time}</div>
+      <div>●</div>
+      <div>
+        <h4>${title}</h4>
+        <p>${label}</p>
+        ${planHtml}
+      </div>
+      <span class="badge">Session</span>
+    </div>
+  `;
+}
+
 function renderDesktopDay(day) {
   byId("sideDay").textContent = `DAY ${currentDayIndex + 1}`;
   byId("sideDate").textContent = `${formatWeekday(day.w)}, ${day.d}`;
@@ -473,21 +532,7 @@ function renderDesktopDay(day) {
     )
     .join("");
 
-  byId("scheduleList").innerHTML = day.program
-    .map(
-      ([time, title, label]) => `
-        <div class="timeline-row">
-          <div class="time">${time}</div>
-          <div>●</div>
-          <div>
-            <h4>${title}</h4>
-            <p>${label}</p>
-          </div>
-          <span class="badge">Session</span>
-        </div>
-      `
-    )
-    .join("");
+  byId("scheduleList").innerHTML = day.program.map((entry) => renderScheduleEntry(entry)).join("");
 }
 
 function renderMobileDay(day) {
@@ -524,19 +569,7 @@ function renderMobileDay(day) {
     </button>
   `;
 
-  byId("mSchedule").innerHTML = day.program
-    .map(
-      ([time, title, label]) => `
-        <div class="timeline-row mobile-timeline-row">
-          <div class="time">${time}</div>
-          <div>
-            <h4>${title}</h4>
-            <p>${label}</p>
-          </div>
-        </div>
-      `
-    )
-    .join("");
+  byId("mSchedule").innerHTML = day.program.map((entry) => renderScheduleEntry(entry, { mobile: true })).join("");
 
   byId("mLocation").textContent = day.city;
   renderDayMap("mLocationMap", day);
@@ -572,7 +605,6 @@ function renderGuideCard([title, items]) {
 }
 
 function resetPanelNav() {
-  byId("scheduleList").classList.remove("active");
   const overviewButton = document.querySelector('.panel .side-menu button[data-section="overview"]');
   if (overviewButton) setPanelActiveButton(overviewButton);
 
@@ -614,12 +646,16 @@ function setPanelActiveButton(button) {
 }
 
 function scrollToDaySection(sectionName) {
+  if (sectionName === "overview") {
+    const mainCard = document.querySelector(".main-card");
+    if (mainCard) {
+      mainCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    return;
+  }
+
   const section = document.getElementById(`section-${sectionName}`);
   if (!section) return;
-
-  if (sectionName === "schedule") {
-    byId("scheduleList").classList.add("active");
-  }
 
   section.scrollIntoView({ behavior: "smooth", block: "start" });
 }
