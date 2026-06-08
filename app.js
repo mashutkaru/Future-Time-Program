@@ -116,18 +116,18 @@ const days = [
     m: "JUL",
     title: "Arrival in Tokyo",
     city: "Narita → Shinagawa Prince Hotel",
-    theme: "Landing in Japan, check-in at Shinagawa Prince Hotel, and dinner at LUXE DINING HAPUNA.",
+    theme: "Landing in Japan, hotel check-in, and a welcome buffet dinner near the hotel.",
     tip: "Stay with the group after landing and keep luggage tagged.",
     items: [
       ["ARRIVAL", "Group arrival.", ICONS.plane],
-      ["TRANSFER", "Transfer to Shinagawa Prince Hotel.", ICONS.transfer],
-      ["DINNER", "Dinner at LUXE DINING HAPUNA.", ICONS.dinner],
+      ["CHECK-IN", "Hotel check-in at Shinagawa Prince Hotel.", ICONS.checkIn],
+      ["DINNER", "Buffet dinner near the hotel.", ICONS.dinner],
       ["OVERNIGHT", "Overnight in Tokyo.", ICONS.moon],
     ],
     program: [
       ["14:00", "Arrival", "Narita Airport"],
-      ["Afternoon", "Hotel check-in", "Shinagawa Prince Hotel (品川プリンスホテル)"],
-      ["19:00", "Dinner", "LUXE DINING HAPUNA"],
+      ["16:00", "Hotel check-in", "Shinagawa Prince Hotel (品川プリンスホテル)"],
+      ["Evening", "Buffet dinner", "Near the hotel"],
     ],
   },
   {
@@ -135,31 +135,31 @@ const days = [
     d: "9.7",
     m: "JUL",
     title: "Tokyo municipalities & innovation",
-    city: "Minato, Tokyo",
-    theme: "Morning policy dialogue with Tokyo Metropolitan Government officials, lunch in Ginza, and Minato ward visits.",
+    city: "Meguro / Minato, Tokyo",
+    theme: "Meguro pass-through, TMG policy dialogue, lunch in Ginza, and a geriatrics institute visit.",
     tip: "Observe how national policy becomes local service design.",
     items: [
+      ["MEGURO CITY HALL", "Pass-through visit.", ICONS.building],
       ["TMG PANEL", "Policy dialogue with government officials.", ICONS.panel],
-      ["LUNCH", "Lunch at Sushi Tofuro Ginza 1-chome.", ICONS.dinner],
-      ["MINATO CITY HALL", "Office visit.", ICONS.building],
-      ["MINATO SPORTS CENTER", "Site visit.", ICONS.sports],
+      ["GERONTOLOGY INSTITUTE", "Tokyo Metropolitan Institute for Geriatrics and Gerontology.", ICONS.medical],
+      ["LUNCH", "Little Edo · Sushi Tofuro Ginza 1-chome.", ICONS.dinner],
     ],
     program: [
+      ["09:00–10:00", "Meguro City Hall", "Pass through"],
       [
-        "10:00–13:00",
+        "11:00–15:00",
         "Panel discussion with Government officials",
         "Tokyo Metropolitan Government — simultaneous translation",
         [
-          ["10:00", "Keynote lecture (30 min)", "Policy Design and Governance Challenges in Super-Aging Societies"],
+          ["11:00", "Keynote lecture (30 min)", "Policy Design and Governance Challenges in Super-Aging Societies"],
           ["Panel 1", "Governance, Workforce, and Policy Coordination", "Japan–Israel comparative perspectives (25 min)"],
           ["Break", "Coffee break", "10 min"],
           ["Panel 2", "Prevention, Independence Support, and Care Models", "Japan–Israel comparative perspectives (25 min)"],
           ["Roundtable", "Interactive exchange", "Japanese and Israeli participants, policymakers, researchers & practitioners (40 min)"],
         ],
       ],
-      ["13:00–14:30", "Lunch", "Sushi Tofuro Ginza 1-chome"],
-      ["15:00–16:00", "Minato City Hall", "Office visit"],
-      ["16:00–17:00", "Minato-ku Sports Center", "Site visit"],
+      ["Lunch", "Lunch", "Little Edo · Sushi Tofuro Ginza 1-chome"],
+      ["Afternoon", "Tokyo Metropolitan Institute for Geriatrics and Gerontology", "Site visit"],
     ],
   },
   {
@@ -211,21 +211,21 @@ const days = [
     m: "JUL",
     title: "Tokyo touring day",
     city: "Tokyo",
-    theme: "Infrastructure, parks, waterfront, teamLab, and an evening social event.",
+    theme: "Infrastructure, parks, waterfront, teamLab, and a social event at Takanawa Gateway.",
     tip: "Bring layers, charger and flexibility for weather changes.",
     items: [
       ["DISCHARGE CHANNEL", "Metropolitan Area Outer Underground Discharge Channel.", ICONS.infrastructure],
       ["PARKS", "Mizumoto Park or Shimizu Park.", ICONS.park],
       ["YAKATABUNE", "Boat to Hamarikyu Garden.", ICONS.boat],
-      ["SOCIAL EVENT", "Evening gathering.", ICONS.social],
+      ["SOCIAL EVENT", "Evening gathering at Takanawa Gateway.", ICONS.hub],
     ],
     program: [
       ["09:30–11:30", "Metropolitan Area Outer Underground Discharge Channel", "Infrastructure visit"],
       ["12:00–14:00", "Mizumoto Park or Shimizu Park", "Park visit"],
-      ["12:00", "Lunch", "Obento (location TBC)"],
+      ["Lunch", "Lunch", "Obento or restaurant (TBC)"],
       ["15:00–17:00", "Yakatabune boat", "Hamarikyu Garden"],
-      ["18:00–20:00", "teamLab", "Immersive art experience"],
-      ["20:30–22:00", "Social event", "Evening gathering (Ory / ארז)"],
+      ["16:00–18:00", "teamLab", "Immersive art experience"],
+      ["19:00–21:00", "Social event", "Takanawa Gateway"],
     ],
   },
   {
@@ -244,7 +244,7 @@ const days = [
     ],
     program: [
       ["10:00–12:00", "BABA Lab (Saitama)", "Site visit — 3 groups (横地様)"],
-      ["12:00", "Lunch", "Café Hobonora (カフェほぼのら)"],
+      ["12:00–13:00", "Lunch", "Café Hobonora (カフェほぼのら)"],
       ["Afternoon", "Dementia-Friendly Center", "認知症フレンドリーセンター"],
       ["Afternoon", "Saitama City Senior Welfare Division", "さいたま市高齢福祉課"],
       ["Afternoon", "Community Comprehensive Support Center", "地域包括支援センター — welfare volunteers Q&A"],
@@ -256,20 +256,19 @@ const days = [
     d: "14.7",
     m: "JUL",
     title: "Care tech & final event",
-    city: "Tokyo",
-    theme: "Care technology, innovation visits, and the joint closing event.",
+    city: "Minato / Tokyo",
+    theme: "Minato ward visits, Zenkou care technology, and the joint closing event.",
     tip: "Ask what makes a care technology usable and scalable.",
     items: [
+      ["MINATO CITY HALL", "Office visit.", ICONS.building],
+      ["MINATO SPORTS CENTER", "Site visit.", ICONS.sports],
       ["ZENKOUKAI", "Zenkou Research Institute — Care Tech Lab.", ICONS.tech],
-      ["WOVEN BY TOYOTA", "Headquarters visit.", ICONS.car],
-      ["TAKANAWA GATEWAY", "Commercial / social hub.", ICONS.hub],
       ["FINAL EVENT", "Joint closing event.", ICONS.event],
     ],
     program: [
-      ["09:00–11:00", "Zenkou Research Institute (Care Tech Lab)", "Rehabilitation & innovation visit"],
-      ["12:00–13:00", "Woven by Toyota (Tokyo HQ)", "Innovation lab visit"],
-      ["12:00", "Lunch", "Little Edo"],
-      ["13:00–15:00", "Takanawa Gateway", "Commercial / social hub"],
+      ["09:00–11:30", "Zenkou Research Institute (Care Tech Lab)", "Rehabilitation & innovation visit"],
+      ["10:30–12:00", "Minato City Hall", "Office visit"],
+      ["13:30–14:30", "Minato-ku Sports Center", "Site visit"],
       ["17:30–22:00", "Final Joint Event", "Resilient Community Care and Wellbeing for Prolonged Crisis in Aging Societies, Vol. 2"],
     ],
   },
@@ -646,10 +645,7 @@ function setPanelActiveButton(button) {
 
 function scrollToDaySection(sectionName) {
   if (sectionName === "overview") {
-    const mainCard = document.querySelector(".main-card");
-    if (mainCard) {
-      mainCard.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    scrollDayViewToTop();
     return;
   }
 
@@ -668,6 +664,11 @@ function setMobileActiveButton(button) {
 }
 
 function scrollToMobileSection(sectionName) {
+  if (sectionName === "overview") {
+    scrollDayViewToTop();
+    return;
+  }
+
   const section = document.getElementById(`m-section-${sectionName}`);
   if (!section) return;
 
