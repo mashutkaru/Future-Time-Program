@@ -336,6 +336,18 @@ const dayMaps = {
     src: "https://www.google.com/maps/d/embed?mid=1IUPlzFBabwKk6R7r7fIQqNbHj-Clcs4&ehbc=2E312F",
     title: "July 12 Sunday",
   },
+  "Saitama care visits": {
+    src: "https://www.google.com/maps/d/embed?mid=1Pezeih-CifGEbfrkqg10sPUi3LHKIOg&ehbc=2E312F",
+    title: "July 13 Monday",
+  },
+  "Care tech & final event": {
+    src: "https://www.google.com/maps/d/embed?mid=1uCaE_ygxN8Un5Q-7FOIvGyqLTrFKKl4&ehbc=2E312F",
+    title: "July 14 Tuesday",
+  },
+  "Summary + departure": {
+    src: "https://www.google.com/maps/d/embed?mid=1ZgwBBCUWDVOCGlfIPt__LAkWsFGHPU8&ehbc=2E312F",
+    title: "July 15 Wednesday",
+  },
 };
 
 let currentDayIndex = 0;
@@ -354,6 +366,9 @@ function runTests() {
   console.assert(Boolean(dayMaps[days[3].title]), "Day 10.7 should have a map");
   console.assert(Boolean(dayMaps[days[4].title]), "Day 11.7 should have a map");
   console.assert(Boolean(dayMaps[days[5].title]), "Day 12.7 should have a map");
+  console.assert(Boolean(dayMaps[days[6].title]), "Day 13.7 should have a map");
+  console.assert(Boolean(dayMaps[days[7].title]), "Day 14.7 should have a map");
+  console.assert(Boolean(dayMaps[days[8].title]), "Day 15.7 should have a map");
   console.assert(prep.length >= 1 && avoid.length >= 1, "Preparation and avoid pages should have content");
   ["overview", "schedule", "location", "notes", "tips"].forEach((name) => {
     console.assert(Boolean(byId(`section-${name}`)), `Missing #section-${name}`);
