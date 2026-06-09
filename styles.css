@@ -703,12 +703,176 @@ main {
   line-height: 1.4;
 }
 
+.guide-card .guide-subhead {
+  list-style: none;
+  margin: 14px 0 6px;
+  padding: 0;
+  font-weight: 650;
+  color: var(--navy);
+}
+
+.guide-card .guide-subhead::marker {
+  content: "";
+}
+
+.guide-hebrew {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(33, 79, 99, 0.12);
+}
+
+.guide-hebrew-title {
+  margin: 0 0 24px;
+  font-size: 1.35rem;
+  font-weight: 780;
+  color: var(--navy);
+  text-align: right;
+}
+
+.guide-hebrew .guide-card ul {
+  padding-right: 20px;
+  padding-left: 0;
+}
+
+.guide-hebrew .guide-card a {
+  color: var(--navy);
+  word-break: break-all;
+}
+
 .avoid-page .guide-card {
   background: #ffffff;
 }
 
 .avoid-page .guide-card li::marker {
   color: var(--danger);
+}
+
+/* Contact page */
+
+.contact-page .subhead {
+  margin-bottom: 32px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.contact-card {
+  padding: 28px 30px;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f9fb 100%);
+  border: 1px solid rgba(33, 79, 99, 0.1);
+  border-radius: 24px;
+  box-shadow:
+    0 14px 28px rgba(33, 79, 99, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.contact-card--wide {
+  grid-column: 1 / -1;
+}
+
+.contact-card h3 {
+  margin: 0 0 20px;
+  padding-bottom: 14px;
+  color: var(--navy);
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(33, 79, 99, 0.1);
+}
+
+.contact-card-body {
+  display: grid;
+  gap: 10px;
+}
+
+.contact-lead {
+  margin: 0;
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.contact-sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.contact-address {
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.contact-action,
+.contact-phone {
+  color: var(--navy-2);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.contact-action {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 6px;
+  padding: 10px 16px;
+  color: #ffffff;
+  background: linear-gradient(180deg, var(--navy-2) 0%, var(--navy) 100%);
+  border-radius: 999px;
+  box-shadow: 0 6px 14px rgba(33, 79, 99, 0.18);
+}
+
+.contact-people,
+.contact-emergency {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-person,
+.contact-emergency li {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(33, 79, 99, 0.08);
+  border-radius: 18px;
+}
+
+.contact-emergency li {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-person-name,
+.contact-label {
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.contact-label {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.contact-phone:hover,
+.contact-action:hover {
+  opacity: 0.92;
 }
 
 /* Mobile app shell */
@@ -1071,7 +1235,7 @@ main {
     left: 0;
     z-index: 130;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     min-height: var(--mobile-tab-height);
     gap: 4px;
@@ -1183,6 +1347,31 @@ main {
 
   .guide-card {
     border-radius: 18px;
+  }
+
+  .contact-page .subhead {
+    margin-bottom: 22px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .contact-card {
+    padding: 22px 20px;
+    border-radius: 20px;
+  }
+
+  .contact-card h3 {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    font-size: 16px;
+  }
+
+  .contact-emergency li {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .map-frame {

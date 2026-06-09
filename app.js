@@ -296,12 +296,11 @@ const days = [
 const delegationHotel = {
   name: "Shinagawa Prince Hotel",
   nameJa: "品川プリンスホテル",
-  mapSrc: "https://www.google.com/maps?q=35.6279119,139.7367526&hl=en&z=16&output=embed",
   mapLink: "https://maps.app.goo.gl/i9wZU4pj519VPV3u5",
 };
 
 const prep = [
-  ["Accommodation", [`Delegation hotel: ${delegationHotel.name} (${delegationHotel.nameJa}).`, "Located in Shinagawa, Tokyo — see the Map page for directions."]],
+  ["Accommodation", [`Delegation hotel: ${delegationHotel.name} (${delegationHotel.nameJa}).`, "Located in Shinagawa, Tokyo — see the Contact page for directions."]],
   ["Travel Documents", ["Passport, visa, insurance and copies.", "Israeli passports do not need special visa procedures."]],
   ["Arrival & Entry Procedures", ["Complete Visit Japan Web declaration.", "Register flight and personal details.", "Save QR code for airport entry."]],
   ["Currency & Payments", ["Bring 10,000–20,000 JPY cash.", "Cards accepted in large stores.", "Cash needed for small shops and taxis."]],
@@ -310,11 +309,88 @@ const prep = [
   ["General Suggestions", ["Be punctual and arrive early.", "Keep phone silent in public.", "Bring personal medications."]],
 ];
 
+const prepHe = [
+  ["מסמכי נסיעה", [
+    "☐ דרכון בתוקף — יש לבדוק את תאריך התפוגה.",
+    "☐ ויזה — בעלי דרכון ישראלי אינם נדרשים להליך מיוחד.",
+  ]],
+  ["הגעה וכניסה ליפן", [
+    "☐ מכתב הזמנה — יסופק בהמשך.",
+    '☐ יש למלא הצהרה מקוונת באתר Visit Japan Web: <a href="https://services.digital.go.jp/en/visit-japan-web/" target="_blank" rel="noopener noreferrer">services.digital.go.jp/en/visit-japan-web/</a>',
+    "::בתוך האתר יש לבצע:",
+    "☐ רישום פרטי טיסה ופרטים אישיים.",
+    "☐ מילוי טפסי מכס והסגר / בריאות.",
+    "☐ שמירת קוד QR לשימוש בכניסה בשדה התעופה.",
+  ]],
+  ["כסף ותשלומים", [
+    "☐ מומלץ להביא מזומן בסכום של 10,000–20,000 ין יפני.",
+    "☐ ניתן לבצע המרת מטבע בשדה התעופה — אין הרבה עמדות המרה זמינות בהמשך.",
+    "☐ כספומטים זמינים בחנויות נוחות ובתחנות רכבת, אך העמלה גבוהה.",
+    "☐ כרטיסי אשראי / דביט מתקבלים בחנויות גדולות — חשוב לזכור את הקוד הסודי ולהביא גם כרטיס פיזי.",
+    "☐ מזומן נדרש בחנויות קטנות, בחלק מהמוניות ובחלק מאתרי התיירות.",
+    "☐ המטבע המקומי: ין יפני — JPY.",
+  ]],
+  ["אריזה ולבוש", [
+    "☐ קוד לבוש רשמי:<br>גברים — חליפה, ורצוי להחזיק עניבה בהישג יד.<br>נשים — ז׳קט; ללא חולצות ללא שרוולים.",
+    "☐ נעליים סגורות.",
+    "☐ גרביים בתיק יד.",
+    "☐ מזג האוויר חם — כ־32–35 מעלות במהלך היום.",
+    "☐ נעלי הליכה נוחות.",
+    "☐ מטריית נסיעות או מעיל גשם — אופציונלי.",
+    "☐ שקע חשמל מסוג A, מתח 100V.",
+  ]],
+  ["להזמין מראש", [
+    "☐ השכרת Wi-Fi נייד או כרטיס SIM — ניתן לאסוף בשדה התעופה.",
+    '::חברה מומלצת: <a href="https://www.japan-wireless.com/" target="_blank" rel="noopener noreferrer">japan-wireless.com</a>',
+    "☐ Wi-Fi חינם זמין במלונות, אך מוגבל מאוד במרחבים ציבוריים.",
+    "☐ כרטיסי ביקור.",
+  ]],
+  ["המלצות כלליות", [
+    "☐ להקפיד על עמידה בזמנים — להגיע מוקדם.",
+    "☐ שימוש בטלפון במרחב הציבורי צריך להיות שקט.",
+    "☐ יש להסיר נעליים במקדשים, בכניסה לחדרי מלון מסוימים ובחלק מהמסעדות.",
+    "☐ מצופה להתנהגות מנומסת ולשפת גוף מכבדת.",
+    "☐ מומלץ להביא מתנות תודה קטנות לביקורים רשמיים.",
+  ]],
+];
+
 const avoid = [
   ["Formal Visits", ["Do not arrive late.", "Do not use your phone during meetings.", "Do not dress casually.", "Do not forget your name tag."]],
   ["Public Etiquette", ["Do not speak loudly in public.", "Do not eat while walking.", "Smoke only in marked areas.", "Avoid pointing with fingers."]],
   ["Money & Connectivity", ["Do not rely only on credit cards.", "Do not count on free public Wi‑Fi.", "Do not leave tips; it is not customary."]],
   ["Conversation & Gifts", ["Avoid sensitive political topics.", "Avoid being overly direct.", "Do not bring oversized or perishable gifts."]],
+];
+
+const avoidHe = [
+  ["ביקורים רשמיים", [
+    "אל תאחרו — עמידה בזמנים היא חיונית.",
+    "אל תשתמשו בטלפון ואל תבדקו אותו במהלך פגישות.",
+    "הימנעו מדיבור או משימוש במכשירים במהלך מצגות.",
+    "אל תתלבשו באופן יומיומי מדי — ללא גופיות; יש לכפתר את החולצה.",
+    "אל תשלבו רגליים ואל תישבו ברישול במהלך פגישות רשמיות.",
+    "אל תשכחו לענוד את תג השם בכל עת.",
+  ]],
+  ["נימוסים במרחב הציבורי", [
+    "אל תדברו בקול רם ואל תשתמשו במחוות מוגזמות במרחב הציבורי.",
+    "אל תאכלו או תשתו בזמן הליכה במרחב הציבורי.",
+    "אל תתעלמו ממרחב אישי ומכללי נימוס במרחב הציבורי.",
+    "אל תעשנו ברחוב — רק באזורים המיועדים לעישון.",
+    "הימנעו מדיבור בקול רם במרחבים ציבוריים.",
+    "הימנעו מהבעת רגשות חזקים או תסכול במרחב הציבורי.",
+    "הימנעו מאכילה או שתייה תוך כדי הליכה.",
+    "הימנעו מהצבעה באצבע — השתמשו בכף יד פתוחה.",
+  ]],
+  ["כסף וקישוריות", [
+    "אל תסתמכו רק על כרטיסי אשראי — החזיקו מעט ין במזומן.",
+    "אל תבנו על Wi-Fi חינמי — היערכו מראש עם SIM או Wi-Fi נייד.",
+    "הימנעו מהסתמכות על Wi-Fi ציבורי — הביאו SIM או Wi-Fi נייד.",
+    "אל תשאירו טיפ או עודף קטן במסעדות או בקופות — זה לא מקובל.",
+  ]],
+  ["שיחה ומתנות", [
+    "אל תביאו מתנות גדולות מדי, מתכלות או לא רשמיות מדי.",
+    "אל תעלו נושאים רגישים, למשל פוליטיקה, ללא הקשר מתאים.",
+    "הימנעו מישירות יתר או מעימותים.",
+  ]],
 ];
 
 const dayPhotos = {
@@ -593,14 +669,25 @@ function scrollMobileDateIntoView() {
 
 function renderGuides() {
   byId("prepGrid").innerHTML = prep.map(renderGuideCard).join("");
+  byId("prepGridHe").innerHTML = prepHe.map(renderGuideCard).join("");
   byId("avoidGrid").innerHTML = avoid.map(renderGuideCard).join("");
+  byId("avoidGridHe").innerHTML = avoidHe.map(renderGuideCard).join("");
 }
 
 function renderGuideCard([title, items]) {
+  const listItems = items
+    .map((item) => {
+      if (item.startsWith("::")) {
+        return `<li class="guide-subhead">${item.slice(2)}</li>`;
+      }
+      return `<li>${item}</li>`;
+    })
+    .join("");
+
   return `
     <article class="guide-card">
       <h3>${title}</h3>
-      <ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>
+      <ul>${listItems}</ul>
     </article>
   `;
 }

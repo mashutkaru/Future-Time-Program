@@ -41,7 +41,7 @@
   />
   <link rel="icon" href="./assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="./assets/favicon.png" />
-  <link rel="stylesheet" href="./styles.css?v=14" />
+  <link rel="stylesheet" href="./styles.css?v=17" />
 </head>
 <body>
   <div class="app">
@@ -54,7 +54,6 @@
         <nav class="nav" aria-label="Main navigation">
           <button class="active" data-page="day">Day Program</button>
           <button data-page="prep">Preparation</button>
-          <button data-page="map">Map</button>
           <button data-page="avoid">What to avoid</button>
           <button data-page="contact">Contact</button>
         </nav>
@@ -209,28 +208,10 @@
           </div>
 
           <div class="grid" id="prepGrid"></div>
-        </div>
-      </section>
 
-      <section class="page" id="page-map">
-        <div class="subpage">
-          <div class="subhead">
-            <div>
-              <h2>Map</h2>
-              <p>Delegation hotel — Shinagawa Prince Hotel (品川プリンスホテル).</p>
-            </div>
-            <button class="back" data-page="day" type="button">Back to day program</button>
-          </div>
-
-          <div class="map-frame">
-            <iframe
-              class="map-embed"
-              title="Shinagawa Prince Hotel"
-              src="https://www.google.com/maps?q=35.6279119,139.7367526&hl=en&z=16&output=embed"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
+          <div class="guide-hebrew prep-hebrew" dir="rtl" lang="he">
+            <h3 class="guide-hebrew-title">הוראות הכנה</h3>
+            <div class="grid" id="prepGridHe"></div>
           </div>
         </div>
       </section>
@@ -246,11 +227,16 @@
           </div>
 
           <div class="grid" id="avoidGrid"></div>
+
+          <div class="guide-hebrew avoid-hebrew" dir="rtl" lang="he">
+            <h3 class="guide-hebrew-title">מה להימנע</h3>
+            <div class="grid" id="avoidGridHe"></div>
+          </div>
         </div>
       </section>
 
       <section class="page" id="page-contact">
-        <div class="subpage">
+        <div class="subpage contact-page">
           <div class="subhead">
             <div>
               <h2>Contact</h2>
@@ -259,30 +245,53 @@
             <button class="back" data-page="day" type="button">Back to day program</button>
           </div>
 
-          <div class="grid">
-            <div class="guide-card">
+          <div class="contact-grid">
+            <article class="contact-card">
               <h3>Delegation hotel</h3>
-              <p>
-                Shinagawa Prince Hotel<br />
-                品川プリンスホテル<br />
-                <a href="https://maps.app.goo.gl/i9wZU4pj519VPV3u5" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
-              </p>
-            </div>
+              <div class="contact-card-body">
+                <p class="contact-lead">Shinagawa Prince Hotel</p>
+                <p class="contact-sub">品川プリンスホテル</p>
+                <p class="contact-sub">東京都港区高輪4-10-30</p>
+                <p class="contact-address">4 Chome-10-30 Takanawa, Minato City, Tokyo 108-8611, Japan</p>
+                <a class="contact-phone" href="tel:+81334401111">+81 3-3440-1111</a>
+              </div>
+            </article>
 
-            <div class="guide-card">
-              <h3>Program lead</h3>
-              <p>+81 90-1234-5678</p>
-            </div>
+            <article class="contact-card">
+              <h3>Program team</h3>
+              <ul class="contact-people">
+                <li class="contact-person">
+                  <span class="contact-person-name">Hadas Kushlevich</span>
+                  <a class="contact-phone" href="tel:+818087351677">+81 80-8735-1677</a>
+                </li>
+                <li class="contact-person">
+                  <span class="contact-person-name">Masha Robeen</span>
+                  <a class="contact-phone" href="tel:+972504412944">+972 50-441-2944</a>
+                </li>
+              </ul>
+            </article>
 
-            <div class="guide-card">
-              <h3>Local coordinator</h3>
-              <p>+81 90-9876-5432</p>
-            </div>
-
-            <div class="guide-card">
-              <h3>Medical emergency</h3>
-              <p>Call 119</p>
-            </div>
+            <article class="contact-card contact-card--wide">
+              <h3>Emergency contacts</h3>
+              <ul class="contact-emergency">
+                <li>
+                  <span class="contact-label">Police</span>
+                  <a class="contact-phone" href="tel:110">110</a>
+                </li>
+                <li>
+                  <span class="contact-label">Ambulance / Fire</span>
+                  <a class="contact-phone" href="tel:119">119</a>
+                </li>
+                <li>
+                  <span class="contact-label">Japan Visitor Hotline</span>
+                  <a class="contact-phone" href="tel:+815038162787">050-3816-2787</a>
+                </li>
+                <li>
+                  <span class="contact-label">Lost &amp; Found</span>
+                  <a class="contact-phone" href="tel:+81570550142">0570-550-142</a>
+                </li>
+              </ul>
+            </article>
           </div>
         </div>
       </section>
@@ -306,13 +315,6 @@
         </svg>
         <span class="tab-label">Prep</span>
       </button>
-      <button data-page="map" type="button">
-        <svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-          <circle cx="12" cy="10" r="3"></circle>
-        </svg>
-        <span class="tab-label">Map</span>
-      </button>
       <button data-page="avoid" type="button">
         <svg class="tab-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
@@ -330,6 +332,6 @@
     </nav>
   </div>
 
-  <script src="./app.js?v=13"></script>
+  <script src="./app.js?v=15"></script>
 </body>
 </html>
