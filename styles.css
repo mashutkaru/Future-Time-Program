@@ -1112,9 +1112,12 @@ main {
     display: none !important;
   }
 
-  .mobile-wrap,
-  .mobile-tab-bar {
+  .mobile-wrap {
     display: block;
+  }
+
+  .mobile-tab-bar {
+    display: grid;
   }
 
   .page.active {
