@@ -673,34 +673,15 @@ function setMobileActiveButton(button) {
 }
 
 function scrollToMobileSection(sectionName) {
-  const mobileContent = document.querySelector(".m-content");
-  if (!mobileContent) {
-    const section = document.getElementById(`m-section-${sectionName}`);
-    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (sectionName === "overview") {
+    scrollDayViewToTop();
     return;
   }
 
-  window.scrollTo({ top: 0, behavior: "auto" });
+  const section = document.getElementById(`m-section-${sectionName}`);
+  if (!section) return;
 
-  const scrollContent = () => {
-    if (sectionName === "overview") {
-      mobileContent.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-
-    const section = document.getElementById(`m-section-${sectionName}`);
-    if (!section) return;
-
-    const top = Math.round(
-      section.getBoundingClientRect().top -
-        mobileContent.getBoundingClientRect().top +
-        mobileContent.scrollTop
-    );
-
-    mobileContent.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
-  };
-
-  requestAnimationFrame(scrollContent);
+  section.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function initEvents() {
