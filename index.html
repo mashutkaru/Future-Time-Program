@@ -41,7 +41,7 @@
   />
   <link rel="icon" href="./assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="./assets/favicon.png" />
-  <link rel="stylesheet" href="./styles.css?v=2" />
+  <link rel="stylesheet" href="./styles.css?v=9" />
 </head>
 <body>
   <div class="app">
@@ -131,35 +131,34 @@
 
         <div class="mobile-wrap">
           <div class="mobile-app">
-            <header class="m-head">
-              <img class="brand-logo brand-logo--compact" src="./assets/logo-english.png" alt="Future Time Program" />
-              <div class="m-head-center">
-                <strong id="mHeadDay">DAY 1</strong>
-                <span id="mHeadDate">Tue, 7.7</span>
+            <div class="m-chrome">
+              <header class="m-head">
+                <img class="brand-logo brand-logo--compact" src="./assets/logo-english.png" alt="Future Time Program" />
+                <div class="m-head-center">
+                  <strong id="mHeadDay">DAY 1</strong>
+                  <span id="mHeadDate">Tue, 7.7</span>
+                </div>
+              </header>
+
+              <div class="m-days">
+                <div class="m-days-row" id="mDaysRow"></div>
               </div>
-            </header>
 
-            <div class="m-days">
-              <button class="m-days-arrow" id="prev2" type="button" aria-label="Previous day">‹</button>
-              <div class="m-days-row" id="mDaysRow"></div>
-              <button class="m-days-arrow" id="next2" type="button" aria-label="Next day">›</button>
-            </div>
-
-            <div class="m-hero">
-              <h2 id="mDayTitle">Departure from Israel</h2>
-              <p id="mTheme"></p>
-            </div>
-
-            <div class="m-section-tabs mobile-side-menu" role="tablist" aria-label="Day sections">
-              <button class="active" type="button" data-section="overview" role="tab">Overview</button>
-              <button type="button" data-section="schedule" role="tab">Schedule</button>
-              <button type="button" data-section="location" role="tab">Location</button>
-              <button type="button" data-section="notes" role="tab">Notes</button>
-              <button type="button" data-section="tips" role="tab">Tips</button>
+              <div class="m-section-tabs mobile-side-menu" role="tablist" aria-label="Day sections">
+                <button class="active" type="button" data-section="overview" role="tab">Overview</button>
+                <button type="button" data-section="schedule" role="tab">Schedule</button>
+                <button type="button" data-section="location" role="tab">Location</button>
+                <button type="button" data-section="notes" role="tab">Notes</button>
+                <button type="button" data-section="tips" role="tab">Tips</button>
+              </div>
             </div>
 
             <div class="m-content">
               <section class="m-block m-section" id="m-section-overview">
+                <div class="m-hero">
+                  <h2 id="mDayTitle">Departure from Israel</h2>
+                  <p id="mTheme"></p>
+                </div>
                 <h3>Today at a glance</h3>
                 <div class="m-glance" id="mGlance"></div>
               </section>
@@ -313,6 +312,6 @@
     </nav>
   </div>
 
-  <script src="./app.js?v=2"></script>
+  <script src="./app.js?v=10"></script>
 </body>
 </html>

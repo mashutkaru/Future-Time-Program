@@ -652,6 +652,23 @@ function setPanelActiveButton(button) {
   button.classList.add("active");
 }
 
+function getDesktopScrollOffset() {
+  const header = document.querySelector("header.desktop-only");
+  const dateStrip = document.querySelector(".date-strip");
+  const mainCard = document.querySelector(".main-card");
+
+  if (header && dateStrip && mainCard) {
+    const stripMargin = parseFloat(getComputedStyle(dateStrip).marginBottom) || 0;
+    return header.offsetHeight + dateStrip.offsetHeight + stripMargin;
+  }
+
+  if (dateStrip) {
+    return dateStrip.getBoundingClientRect().bottom;
+  }
+
+  return 104;
+}
+
 function scrollToDaySection(sectionName) {
   if (sectionName === "overview") {
     scrollDayViewToTop();
@@ -661,7 +678,15 @@ function scrollToDaySection(sectionName) {
   const section = document.getElementById(`section-${sectionName}`);
   if (!section) return;
 
-  section.scrollIntoView({ behavior: "smooth", block: "start" });
+  requestAnimationFrame(() => {
+    const scrollOffset = getDesktopScrollOffset();
+    const top = window.scrollY + section.getBoundingClientRect().top - scrollOffset;
+
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: "smooth",
+    });
+  });
 }
 
 function setMobileActiveButton(button) {
@@ -672,16 +697,42 @@ function setMobileActiveButton(button) {
   button.classList.add("active");
 }
 
-function scrollToMobileSection(sectionName) {
-  if (sectionName === "overview") {
-    scrollDayViewToTop();
-    return;
+function getMobileSectionScrollTop(section, mobileContent) {
+  let offset = 0;
+  let element = section;
+
+  while (element && element !== mobileContent) {
+    offset += element.offsetTop;
+    element = element.offsetParent;
   }
 
+  if (element !== mobileContent) {
+    return (
+      mobileContent.scrollTop +
+      section.getBoundingClientRect().top -
+      mobileContent.getBoundingClientRect().top
+    );
+  }
+
+  return offset;
+}
+
+function scrollToMobileSection(sectionName) {
+  const mobileContent = document.querySelector(".m-content");
   const section = document.getElementById(`m-section-${sectionName}`);
   if (!section) return;
 
-  section.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (!mobileContent) {
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    mobileContent.scrollTo({
+      top: Math.max(0, getMobileSectionScrollTop(section, mobileContent)),
+      behavior: "smooth",
+    });
+  });
 }
 
 function initEvents() {
@@ -725,8 +776,6 @@ function initEvents() {
     }
   });
 
-  byId("prev2").addEventListener("click", () => setCurrentDay(currentDayIndex - 1));
-  byId("next2").addEventListener("click", () => setCurrentDay(currentDayIndex + 1));
 }
 
 runTests();
