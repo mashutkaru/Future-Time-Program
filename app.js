@@ -418,9 +418,6 @@ function renderDateStrip() {
     )
     .join("");
 
-  document.querySelectorAll("[data-day]").forEach((button) => {
-    button.addEventListener("click", () => setCurrentDay(Number(button.dataset.day)));
-  });
 }
 
 function renderDayMap(frameId, day) {
@@ -536,16 +533,18 @@ function renderDesktopDay(day) {
 function renderMobileDay(day) {
   const dayLabel = `DAY ${currentDayIndex + 1}`;
   const dateLabel = `${formatWeekday(day.w)}, ${day.d}`;
+  const firstSession = day.program[0];
+  const lastSession = day.program[day.program.length - 1];
 
   byId("mHeadDay").textContent = dayLabel;
   byId("mHeadDate").textContent = dateLabel;
-  byId("mDayTitle").textContent = dayLabel;
-  byId("mDate").textContent = dateLabel;
+  byId("mDayTitle").textContent = day.title;
+  byId("mTheme").textContent = day.theme;
 
   byId("mDaysRow").innerHTML = days
     .map(
       (entry, index) => `
-        <button class="m-date ${index === currentDayIndex ? "active" : ""}" data-day="${index}" type="button">
+        <button class="m-date ${index === currentDayIndex ? "active" : ""}" data-day="${index}" type="button" aria-label="${entry.w} ${entry.d} ${entry.m}">
           ${entry.w}<br><b>${entry.d}</b><br>${entry.m}
         </button>
       `
@@ -553,17 +552,26 @@ function renderMobileDay(day) {
     .join("");
 
   byId("mGlance").innerHTML = `
-    <button type="button">
-      <span>${day.program[0]?.[0] || "TBD"}<br><small>Start</small></span>
-      <span>›</span>
+    <button type="button" data-scroll="schedule">
+      <span>
+        <strong>${firstSession?.[1] || "Program details"}</strong>
+        <small>${firstSession?.[0] || "Start time"}</small>
+      </span>
+      <span class="glance-arrow" aria-hidden="true">›</span>
     </button>
-    <button type="button">
-      <span>${day.city}<br><small>Location</small></span>
-      <span>›</span>
+    <button type="button" data-scroll="location">
+      <span>
+        <strong>${day.city}</strong>
+        <small>Location</small>
+      </span>
+      <span class="glance-arrow" aria-hidden="true">›</span>
     </button>
-    <button type="button">
-      <span>Business casual<br><small>Dress code</small></span>
-      <span>›</span>
+    <button type="button" data-scroll="schedule">
+      <span>
+        <strong>${lastSession?.[1] || "Full schedule"}</strong>
+        <small>${lastSession?.[0] || "End time"}</small>
+      </span>
+      <span class="glance-arrow" aria-hidden="true">›</span>
     </button>
   `;
 
@@ -573,10 +581,6 @@ function renderMobileDay(day) {
   renderDayMap("mLocationMap", day);
   byId("mNotes").textContent = day.theme;
   byId("mTip").textContent = day.tip;
-
-  document.querySelectorAll("#mDaysRow [data-day]").forEach((button) => {
-    button.addEventListener("click", () => setCurrentDay(Number(button.dataset.day)));
-  });
 
   scrollMobileDateIntoView();
 }
@@ -632,7 +636,12 @@ function showPage(pageName) {
     button.classList.toggle("active", button.dataset.page === pageName);
   });
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: "auto" });
+
+  const mobileContent = document.querySelector(".m-content");
+  if (mobileContent) {
+    mobileContent.scrollTo({ top: 0, behavior: "auto" });
+  }
 }
 
 function setPanelActiveButton(button) {
@@ -678,7 +687,16 @@ function scrollToMobileSection(sectionName) {
 function initEvents() {
   document.addEventListener("click", (event) => {
     const pageButton = event.target.closest("[data-page]");
-    if (pageButton) showPage(pageButton.dataset.page);
+    if (pageButton) {
+      showPage(pageButton.dataset.page);
+      return;
+    }
+
+    const dayButton = event.target.closest("[data-day]");
+    if (dayButton) {
+      setCurrentDay(Number(dayButton.dataset.day));
+      return;
+    }
 
     const panelButton = event.target.closest(".panel .side-menu button");
     if (panelButton?.dataset.section) {
@@ -694,6 +712,16 @@ function initEvents() {
     if (mobileButton?.dataset.section) {
       setMobileActiveButton(mobileButton);
       scrollToMobileSection(mobileButton.dataset.section);
+      return;
+    }
+
+    const glanceButton = event.target.closest(".m-glance button[data-scroll]");
+    if (glanceButton?.dataset.scroll) {
+      const sectionButton = document.querySelector(
+        `.mobile-side-menu button[data-section="${glanceButton.dataset.scroll}"]`
+      );
+      if (sectionButton) setMobileActiveButton(sectionButton);
+      scrollToMobileSection(glanceButton.dataset.scroll);
     }
   });
 

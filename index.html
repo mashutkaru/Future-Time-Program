@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#214f63" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Future Time" />
   <title>Future Time Delegation Program</title>
   <meta
     name="description"
@@ -126,94 +130,70 @@
         </div>
 
         <div class="mobile-wrap">
-          <div class="phone">
-            <div class="screen">
-              <div class="m-head">
-                <img class="brand-logo brand-logo--compact" src="./assets/logo-english.png" alt="Future Time Program" />
-
-                <div class="m-head-center">
-                  <strong id="mHeadDay">DAY 1</strong>
-                  <span id="mHeadDate">Tue, 7.7</span>
-                </div>
+          <div class="mobile-app">
+            <header class="m-head">
+              <img class="brand-logo brand-logo--compact" src="./assets/logo-english.png" alt="Future Time Program" />
+              <div class="m-head-center">
+                <strong id="mHeadDay">DAY 1</strong>
+                <span id="mHeadDate">Tue, 7.7</span>
               </div>
+            </header>
 
-              <div class="m-days">
-                <button class="m-days-arrow" id="prev2" type="button" aria-label="Previous day">‹</button>
-                <div class="m-days-row" id="mDaysRow"></div>
-                <button class="m-days-arrow" id="next2" type="button" aria-label="Next day">›</button>
-              </div>
+            <div class="m-days">
+              <button class="m-days-arrow" id="prev2" type="button" aria-label="Previous day">‹</button>
+              <div class="m-days-row" id="mDaysRow"></div>
+              <button class="m-days-arrow" id="next2" type="button" aria-label="Next day">›</button>
+            </div>
 
-              <div class="m-content">
-                <div class="m-block">
-                  <h2 id="mDayTitle">DAY 1</h2>
-                  <strong id="mDate">Tue, 7.7</strong>
+            <div class="m-hero">
+              <h2 id="mDayTitle">Departure from Israel</h2>
+              <p id="mTheme"></p>
+            </div>
 
-                  <div class="side-menu mobile-side-menu">
-                    <button class="active" type="button" data-section="overview">Overview</button>
-                    <button type="button" data-section="schedule">Schedule</button>
-                    <button type="button" data-section="location">Location</button>
-                    <button type="button" data-section="notes">Notes</button>
-                    <button type="button" data-section="tips">Tips</button>
-                  </div>
+            <div class="m-section-tabs mobile-side-menu" role="tablist" aria-label="Day sections">
+              <button class="active" type="button" data-section="overview" role="tab">Overview</button>
+              <button type="button" data-section="schedule" role="tab">Schedule</button>
+              <button type="button" data-section="location" role="tab">Location</button>
+              <button type="button" data-section="notes" role="tab">Notes</button>
+              <button type="button" data-section="tips" role="tab">Tips</button>
+            </div>
+
+            <div class="m-content">
+              <section class="m-block m-section" id="m-section-overview">
+                <h3>Today at a glance</h3>
+                <div class="m-glance" id="mGlance"></div>
+              </section>
+
+              <section class="m-block m-section" id="m-section-schedule">
+                <h3>Program timeline</h3>
+                <div class="m-schedule" id="mSchedule"></div>
+              </section>
+
+              <section class="m-block m-section" id="m-section-location">
+                <h3>Location</h3>
+                <p class="m-section-body" id="mLocation"></p>
+                <div class="day-map-frame day-map-frame--mobile" id="mLocationMap" hidden>
+                  <iframe
+                    class="day-map-embed day-map-embed--mobile"
+                    title="Day location map"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
+              </section>
 
-                <section class="m-block m-section" id="m-section-overview">
-                  <h3>Today at a glance</h3>
-                  <div class="m-list" id="mGlance"></div>
-                </section>
+              <section class="m-block m-section" id="m-section-notes">
+                <h3>Notes</h3>
+                <p class="m-section-body" id="mNotes"></p>
+              </section>
 
-                <section class="m-block m-section" id="m-section-schedule">
-                  <h3>Program timeline</h3>
-                  <div id="mSchedule"></div>
-                </section>
-
-                <section class="m-block m-section" id="m-section-location">
-                  <h3>Location</h3>
-                  <p class="m-section-body" id="mLocation"></p>
-                  <div class="day-map-frame day-map-frame--mobile" id="mLocationMap" hidden>
-                    <iframe
-                      class="day-map-embed"
-                      title="Day location map"
-                      allowfullscreen=""
-                      loading="lazy"
-                      referrerpolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                  </div>
-                </section>
-
-                <section class="m-block m-section" id="m-section-notes">
-                  <h3>Notes</h3>
-                  <p class="m-section-body" id="mNotes"></p>
-                </section>
-
-                <section class="m-block m-section" id="m-section-tips">
-                  <h3>Tip of the day</h3>
+              <section class="m-block m-section" id="m-section-tips">
+                <div class="m-tip-card">
+                  <span class="m-tip-label">Tip of the day</span>
                   <p class="m-section-body" id="mTip"></p>
-                </section>
-
-                <div class="m-block">
-                  <button class="quick-link" data-page="prep" type="button">
-                    <span>Preparation</span><span>›</span>
-                  </button>
-                  <button class="quick-link" data-page="map" type="button">
-                    <span>Map</span><span>›</span>
-                  </button>
-                  <button class="quick-link" data-page="avoid" type="button">
-                    <span>What to avoid</span><span>›</span>
-                  </button>
-                  <button class="quick-link" data-page="contact" type="button">
-                    <span>Contact</span><span>›</span>
-                  </button>
                 </div>
-              </div>
-
-              <nav class="bottom" aria-label="Mobile navigation">
-                <button class="active" data-page="day" type="button">Today</button>
-                <button data-page="prep" type="button">Prep</button>
-                <button data-page="map" type="button">Map</button>
-                <button data-page="avoid" type="button">Avoid</button>
-                <button data-page="contact" type="button">Help</button>
-              </nav>
+              </section>
             </div>
           </div>
         </div>
@@ -308,6 +288,29 @@
         </div>
       </section>
     </main>
+
+    <nav class="mobile-tab-bar" aria-label="Mobile navigation">
+      <button class="active" data-page="day" type="button">
+        <span class="tab-dot" aria-hidden="true"></span>
+        <span>Today</span>
+      </button>
+      <button data-page="prep" type="button">
+        <span class="tab-dot" aria-hidden="true"></span>
+        <span>Prep</span>
+      </button>
+      <button data-page="map" type="button">
+        <span class="tab-dot" aria-hidden="true"></span>
+        <span>Map</span>
+      </button>
+      <button data-page="avoid" type="button">
+        <span class="tab-dot" aria-hidden="true"></span>
+        <span>Avoid</span>
+      </button>
+      <button data-page="contact" type="button">
+        <span class="tab-dot" aria-hidden="true"></span>
+        <span>Help</span>
+      </button>
+    </nav>
   </div>
 
   <script src="./app.js"></script>
