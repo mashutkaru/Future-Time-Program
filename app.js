@@ -411,7 +411,6 @@ function renderDateStrip() {
           <span>
             <span class="date-week">${day.w}</span>
             <span class="date-num">${day.d}</span>
-            <span class="date-month">${day.m}</span>
           </span>
         </button>
       `
@@ -544,8 +543,8 @@ function renderMobileDay(day) {
   byId("mDaysRow").innerHTML = days
     .map(
       (entry, index) => `
-        <button class="m-date ${index === currentDayIndex ? "active" : ""}" data-day="${index}" type="button" aria-label="${entry.w} ${entry.d} ${entry.m}">
-          ${entry.w}<br><b>${entry.d}</b><br>${entry.m}
+        <button class="m-date ${index === currentDayIndex ? "active" : ""}" data-day="${index}" type="button" aria-label="${entry.w} ${entry.d}">
+          ${entry.w}<br><b>${entry.d}</b>
         </button>
       `
     )
@@ -652,21 +651,15 @@ function setPanelActiveButton(button) {
   button.classList.add("active");
 }
 
-function getDesktopScrollOffset() {
+function updateDesktopScrollOffset() {
   const header = document.querySelector("header.desktop-only");
   const dateStrip = document.querySelector(".date-strip");
-  const mainCard = document.querySelector(".main-card");
+  if (!header || !dateStrip) return;
 
-  if (header && dateStrip && mainCard) {
-    const stripMargin = parseFloat(getComputedStyle(dateStrip).marginBottom) || 0;
-    return header.offsetHeight + dateStrip.offsetHeight + stripMargin;
-  }
-
-  if (dateStrip) {
-    return dateStrip.getBoundingClientRect().bottom;
-  }
-
-  return 104;
+  document.documentElement.style.setProperty(
+    "--desktop-scroll-offset",
+    `${header.offsetHeight + dateStrip.offsetHeight}px`
+  );
 }
 
 function scrollToDaySection(sectionName) {
@@ -678,14 +671,13 @@ function scrollToDaySection(sectionName) {
   const section = document.getElementById(`section-${sectionName}`);
   if (!section) return;
 
-  requestAnimationFrame(() => {
-    const scrollOffset = getDesktopScrollOffset();
-    const top = window.scrollY + section.getBoundingClientRect().top - scrollOffset;
+  updateDesktopScrollOffset();
 
-    window.scrollTo({
-      top: Math.max(0, top),
-      behavior: "smooth",
-    });
+  const scrollTarget =
+    section.querySelector(".day-section-title") || section.querySelector(".tip") || section;
+
+  requestAnimationFrame(() => {
+    scrollTarget.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
@@ -781,4 +773,6 @@ function initEvents() {
 runTests();
 renderGuides();
 render();
+updateDesktopScrollOffset();
 initEvents();
+window.addEventListener("resize", updateDesktopScrollOffset);
