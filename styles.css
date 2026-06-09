@@ -1014,57 +1014,6 @@ main {
   text-transform: uppercase;
 }
 
-.mobile-tab-bar {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 130;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2px;
-  padding: 6px 8px calc(8px + env(safe-area-inset-bottom, 0px));
-  background: rgba(33, 79, 99, 0.98);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(12px);
-}
-
-.mobile-tab-bar button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  min-height: 52px;
-  padding: 4px 2px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 10px;
-  font-weight: 800;
-  background: transparent;
-  border: 0;
-  border-radius: 12px;
-}
-
-.mobile-tab-bar .tab-dot {
-  width: 6px;
-  height: 6px;
-  background: currentColor;
-  border-radius: 50%;
-  opacity: 0.45;
-}
-
-.mobile-tab-bar button.active {
-  color: var(--accent);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.mobile-tab-bar button.active .tab-dot {
-  width: 8px;
-  height: 8px;
-  opacity: 1;
-  box-shadow: 0 0 10px rgba(210, 214, 79, 0.65);
-}
-
 /* Responsive */
 
 @media (max-width: 1050px) {
@@ -1112,7 +1061,54 @@ main {
   }
 
   .mobile-tab-bar {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 130;
     display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    padding: 6px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+    background: rgba(33, 79, 99, 0.98);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-tab-bar button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-height: 52px;
+    padding: 4px 2px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 10px;
+    font-weight: 800;
+    background: transparent;
+    border: 0;
+    border-radius: 12px;
+  }
+
+  .mobile-tab-bar .tab-dot {
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    opacity: 0.45;
+  }
+
+  .mobile-tab-bar button.active {
+    color: var(--accent);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .mobile-tab-bar button.active .tab-dot {
+    width: 8px;
+    height: 8px;
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(210, 214, 79, 0.65);
   }
 
   .page.active {
