@@ -266,10 +266,10 @@ const days = [
       ["FINAL EVENT", "Joint closing event.", ICONS.event],
     ],
     program: [
-      ["09:00–11:30", "Zenkou Research Institute (Care Tech Lab)", "Rehabilitation & innovation visit"],
       ["10:30–12:00", "Minato City Hall", "Office visit"],
       ["13:30–14:30", "Minato-ku Sports Center", "Site visit"],
-      ["17:30–22:00", "Final Joint Event", "Resilient Community Care and Wellbeing for Prolonged Crisis in Aging Societies, Vol. 2"],
+      ["15:00–16:30", "Zenkou Research Institute (Care Tech Lab)", "Rehabilitation & innovation visit"],
+      ["17:30–22:00", "Final Event", "Resilient Community Care and Wellbeing for Prolonged Crisis in Aging Societies, Vol. 2"],
     ],
   },
   {
