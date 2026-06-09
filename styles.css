@@ -895,14 +895,17 @@ main {
 }
 
 .m-content {
-  flex: 1;
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: auto;
   padding: 0 16px 24px;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .m-section {
-  scroll-margin-top: calc(170px + env(safe-area-inset-top, 0px));
+  scroll-margin-top: 0;
 }
 
 .m-section-body {
@@ -1120,7 +1123,14 @@ main {
     display: grid;
   }
 
-  .page.active {
+  .page#page-day.active {
+    display: block;
+    height: calc(100dvh - var(--mobile-tab-height));
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .page:not(#page-day).active {
     display: block;
     min-height: calc(100dvh - var(--mobile-tab-height));
   }
@@ -1133,6 +1143,15 @@ main {
     height: calc(100dvh - var(--mobile-tab-height));
     min-height: 0;
     overflow: hidden;
+  }
+
+  .page#page-day.active .mobile-wrap {
+    height: calc(100dvh - var(--mobile-tab-height));
+    overflow: hidden;
+  }
+
+  .page#page-day.active .m-content {
+    min-height: 0;
   }
 
   .subpage {

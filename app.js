@@ -673,15 +673,34 @@ function setMobileActiveButton(button) {
 }
 
 function scrollToMobileSection(sectionName) {
-  if (sectionName === "overview") {
-    scrollDayViewToTop();
+  const mobileContent = document.querySelector(".m-content");
+  if (!mobileContent) {
+    const section = document.getElementById(`m-section-${sectionName}`);
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
 
-  const section = document.getElementById(`m-section-${sectionName}`);
-  if (!section) return;
+  window.scrollTo({ top: 0, behavior: "auto" });
 
-  section.scrollIntoView({ behavior: "smooth", block: "start" });
+  const scrollContent = () => {
+    if (sectionName === "overview") {
+      mobileContent.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    const section = document.getElementById(`m-section-${sectionName}`);
+    if (!section) return;
+
+    const top = Math.round(
+      section.getBoundingClientRect().top -
+        mobileContent.getBoundingClientRect().top +
+        mobileContent.scrollTop
+    );
+
+    mobileContent.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+  };
+
+  requestAnimationFrame(scrollContent);
 }
 
 function initEvents() {
