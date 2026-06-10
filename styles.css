@@ -627,6 +627,21 @@ main {
   border-radius: 999px;
 }
 
+.badge-link {
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.badge-link:hover {
+  color: #fff;
+  background: var(--navy);
+}
+
+.mobile-timeline-row--link {
+  grid-template-columns: 72px 1fr auto;
+  align-items: start;
+}
+
 /* Subpages */
 
 .subpage {

@@ -245,8 +245,8 @@ const days = [
       ["DAY SERVICE", "Community support center, welfare volunteers Q&A & day service.", ICONS.community],
     ],
     program: [
-      ["10:00–12:00", "BABA Lab (Saitama)", "Site visit — 3 groups (横地様)"],
-      ["12:00–13:00", "Lunch", "Café Hobonora (カフェほぼのら)"],
+      ["10:00–12:00", "BABA Lab (Saitama)", "Site visit — 3 groups (横地様)", null, "https://www.baba-lab.net/about"],
+      ["12:00–13:00", "Lunch", "Healthy Cafe Nora (コミュニティスペースほぼのら)", null, "https://maps.app.goo.gl/oJmotPJrSpEWiDCK7"],
       ["Afternoon", "Dementia-Friendly Center", "認知症フレンドリーセンター"],
       ["Afternoon", "Saitama City Senior Welfare Division", "さいたま市高齢福祉課"],
       ["Afternoon", "Community Comprehensive Support Center", "地域包括支援センター — welfare volunteers Q&A"],
@@ -581,20 +581,28 @@ function renderSchedulePlanBlock(plan) {
   return `<div class="timeline-plan">${rowHtml}${embedHtml}</div>`;
 }
 
+function renderScheduleBadge(link) {
+  if (!link) return "";
+
+  return `<a class="badge badge-link" href="${link}" target="_blank" rel="noopener noreferrer">Website Link</a>`;
+}
+
 function renderScheduleEntry(entry, { mobile = false } = {}) {
-  const [time, title, label, plan] = entry;
+  const [time, title, label, plan, link] = entry;
   const planHtml = renderSchedulePlanBlock(plan);
   const groupClass = planHtml ? " timeline-row--group" : "";
+  const badgeHtml = renderScheduleBadge(link);
 
   if (mobile) {
     return `
-      <div class="timeline-row mobile-timeline-row${groupClass}">
+      <div class="timeline-row mobile-timeline-row${groupClass}${link ? " mobile-timeline-row--link" : ""}">
         <div class="time">${time}</div>
         <div>
           <h4>${title}</h4>
           <p>${label}</p>
           ${planHtml}
         </div>
+        ${badgeHtml}
       </div>
     `;
   }
@@ -608,7 +616,7 @@ function renderScheduleEntry(entry, { mobile = false } = {}) {
         <p>${label}</p>
         ${planHtml}
       </div>
-      <span class="badge">Session</span>
+      ${badgeHtml}
     </div>
   `;
 }
