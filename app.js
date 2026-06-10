@@ -90,6 +90,8 @@ const ICONS = {
   ),
 };
 
+const finalEventInvitation = "./assets/AgetechVol2_saveTheDate.pdf";
+
 const days = [
   {
     w: "TUE",
@@ -269,7 +271,12 @@ const days = [
       ["10:30–12:00", "Minato City Hall", "Office visit"],
       ["13:30–14:30", "Minato-ku Sports Center", "Site visit"],
       ["15:00–16:30", "Zenkou Research Institute (Care Tech Lab)", "Rehabilitation & innovation visit"],
-      ["17:30–22:00", "Final Event", "Resilient Community Care and Wellbeing for Prolonged Crisis in Aging Societies, Vol. 2"],
+      [
+        "17:30–22:00",
+        "Final Event",
+        "Resilient Community Care and Wellbeing for Prolonged Crisis in Aging Societies, Vol. 2",
+        [{ embed: finalEventInvitation, title: "Save the date invitation" }],
+      ],
     ],
   },
   {
@@ -510,35 +517,78 @@ function renderDayMap(frameId, day) {
   }
 }
 
-function renderSchedulePlan(plan) {
-  if (!Array.isArray(plan) || plan.length === 0) return "";
+function splitSchedulePlan(plan) {
+  if (!Array.isArray(plan) || plan.length === 0) {
+    return { rows: [], embeds: [] };
+  }
 
-  return `
-    <div class="timeline-plan">
-      ${plan
-        .map(
-          ([time, title, label]) => `
-            <div class="timeline-plan-row">
-              <div class="timeline-plan-time">${time}</div>
-              <div class="timeline-plan-body">
-                <strong>${title}</strong>
-                <p>${label}</p>
-              </div>
-            </div>
-          `
-        )
-        .join("")}
-    </div>
-  `;
+  return {
+    rows: plan.filter((item) => Array.isArray(item)),
+    embeds: plan.filter((item) => item && typeof item === "object" && !Array.isArray(item) && item.embed),
+  };
+}
+
+const invitationAspectRatio = 297 / 210;
+
+function renderScheduleEmbedUrl(src) {
+  return src.includes("#") ? src : `${src}#toolbar=0&navpanes=0&page=1&view=FitH`;
+}
+
+function resizeScheduleEmbeds() {
+  document.querySelectorAll(".timeline-plan-embed").forEach((embed) => {
+    const width = embed.clientWidth;
+    if (!width) return;
+
+    embed.style.height = `${Math.round(width * invitationAspectRatio)}px`;
+  });
+}
+
+function bindScheduleEmbedResize() {
+  document.querySelectorAll('.timeline-plan-embed iframe:not([data-resize-bound="true"])').forEach((iframe) => {
+    iframe.dataset.resizeBound = "true";
+    iframe.addEventListener("load", resizeScheduleEmbeds);
+  });
+}
+
+function renderSchedulePlanBlock(plan) {
+  const { rows, embeds } = splitSchedulePlan(plan);
+  if (!rows.length && !embeds.length) return "";
+
+  const rowHtml = rows
+    .map(
+      ([time, title, label]) => `
+        <div class="timeline-plan-row">
+          <div class="timeline-plan-time">${time}</div>
+          <div class="timeline-plan-body">
+            <strong>${title}</strong>
+            <p>${label}</p>
+          </div>
+        </div>
+      `
+    )
+    .join("");
+
+  const embedHtml = embeds
+    .map(
+      (item) => `
+        <div class="timeline-plan-embed">
+          <iframe src="${renderScheduleEmbedUrl(item.embed)}" title="${item.title || "Invitation"}" loading="lazy"></iframe>
+        </div>
+      `
+    )
+    .join("");
+
+  return `<div class="timeline-plan">${rowHtml}${embedHtml}</div>`;
 }
 
 function renderScheduleEntry(entry, { mobile = false } = {}) {
   const [time, title, label, plan] = entry;
-  const planHtml = renderSchedulePlan(plan);
+  const planHtml = renderSchedulePlanBlock(plan);
+  const groupClass = planHtml ? " timeline-row--group" : "";
 
   if (mobile) {
     return `
-      <div class="timeline-row mobile-timeline-row${plan ? " timeline-row--group" : ""}">
+      <div class="timeline-row mobile-timeline-row${groupClass}">
         <div class="time">${time}</div>
         <div>
           <h4>${title}</h4>
@@ -550,7 +600,7 @@ function renderScheduleEntry(entry, { mobile = false } = {}) {
   }
 
   return `
-    <div class="timeline-row${plan ? " timeline-row--group" : ""}">
+    <div class="timeline-row${groupClass}">
       <div class="time">${time}</div>
       <div>●</div>
       <div>
@@ -603,6 +653,8 @@ function renderDesktopDay(day) {
     .join("");
 
   byId("scheduleList").innerHTML = day.program.map((entry) => renderScheduleEntry(entry)).join("");
+  bindScheduleEmbedResize();
+  scheduleEmbedResize();
 }
 
 function renderMobileDay(day) {
@@ -651,6 +703,8 @@ function renderMobileDay(day) {
   `;
 
   byId("mSchedule").innerHTML = day.program.map((entry) => renderScheduleEntry(entry, { mobile: true })).join("");
+  bindScheduleEmbedResize();
+  scheduleEmbedResize();
 
   byId("mLocation").textContent = day.city;
   renderDayMap("mLocationMap", day);
@@ -698,6 +752,11 @@ function resetPanelNav() {
 
   const mobileOverviewButton = document.querySelector('.mobile-side-menu button[data-section="overview"]');
   if (mobileOverviewButton) setMobileActiveButton(mobileOverviewButton);
+}
+
+function scheduleEmbedResize() {
+  resizeScheduleEmbeds();
+  requestAnimationFrame(resizeScheduleEmbeds);
 }
 
 function render() {
@@ -862,4 +921,7 @@ renderGuides();
 render();
 updateDesktopScrollOffset();
 initEvents();
-window.addEventListener("resize", updateDesktopScrollOffset);
+window.addEventListener("resize", () => {
+  updateDesktopScrollOffset();
+  resizeScheduleEmbeds();
+});
