@@ -655,7 +655,9 @@ function renderDesktopDay(day) {
     photoEl.style.background = "";
   }
 
-  byId("highlights").innerHTML = day.items
+  const highlightsEl = byId("highlights");
+  highlightsEl.classList.toggle("highlights--5", day.items.length === 5);
+  highlightsEl.innerHTML = day.items
     .map(
       ([title, text, icon]) => `
         <div class="highlight">

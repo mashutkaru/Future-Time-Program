@@ -464,6 +464,44 @@ main {
   padding: 30px 34px;
 }
 
+@media (min-width: 1051px) {
+  .highlights--5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(8px, 1.1vw, 18px);
+    padding: clamp(16px, 2vw, 28px) clamp(12px, 1.8vw, 28px);
+  }
+
+  .highlights--5 .highlight {
+    min-width: 0;
+    padding: clamp(12px, 1.3vw, 18px) clamp(8px, 0.9vw, 12px);
+    border-radius: 18px;
+  }
+
+  .highlights--5 .hi-icon {
+    margin-bottom: clamp(6px, 0.7vw, 10px);
+    font-size: clamp(24px, 2.2vw, 32px);
+  }
+
+  .highlights--5 .hi-icon-svg {
+    width: clamp(24px, 2.2vw, 32px);
+    height: clamp(24px, 2.2vw, 32px);
+  }
+
+  .highlights--5 .highlight h3 {
+    margin-bottom: clamp(6px, 0.6vw, 8px);
+    font-size: clamp(10px, 0.82vw, 14px);
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    overflow-wrap: anywhere;
+  }
+
+  .highlights--5 .highlight p {
+    font-size: clamp(10px, 0.72vw, 13px);
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+}
+
 .highlight {
   padding: 22px 18px;
   background: linear-gradient(180deg, #ffffff 0%, #f5f8fa 100%);
