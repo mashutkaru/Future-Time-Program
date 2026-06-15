@@ -228,14 +228,14 @@ const days = [
     items: [
       ["FUKAGAWA EDO MUSEUM", "Museum visit.", ICONS.museum],
       ["KIYOSUMI GARDENS", "Garden visit.", ICONS.park],
-      ["ASAKUSA", "Free time in Asakusa.", ICONS.stroll],
+      ["ASAKUSA", "Senso-ji Temple, street market stroll, free time.", ICONS.stroll],
       ["TEAMLAB", "Immersive art experience.", ICONS.museum],
     ],
     program: [
       ["09:30–11:00", "Fukagawa Edo Museum", "Cultural visit"],
       ["11:30–12:30", "Kiyosumi Gardens", "Cultural visit"],
       ["13:00–14:00", "Lunch", "TBC"],
-      ["15:00–16:00", "Asakusa", "Free time"],
+      ["15:00–16:00", "Asakusa", "Senso-ji Temple<br>Street market stroll<br>Free time"],
       ["17:00–19:00", "teamLab", "Immersive art experience"],
       ["19:00–21:00", "Social event", "Networking"],
     ],
