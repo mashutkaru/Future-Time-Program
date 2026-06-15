@@ -149,7 +149,7 @@ const days = [
       ["TAKANAWA GATEWAY", "Cultural visit.", ICONS.hub],
     ],
     program: [
-      ["09:30–10:00", "Minato — Preventive center", "ラクっちゃ（介護予防総合センター）— multi-generational community center"],
+      ["09:30–10:00", "Minato — Preventive center", "Multi-generational community center<br>ラクっちゃ（介護予防総合センター）"],
       ["10:00–10:30", "Minato Sports Center", "Sports center visit"],
       ["10:45–11:30", "Minato City — LTC & preventive systems", "ラクっちゃ（介護予防総合センター）"],
       ["12:15–12:45", "Lunch", "Sushi Tofuro Ginza"],
