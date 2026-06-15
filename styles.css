@@ -540,11 +540,19 @@ main {
 
 .timeline-row {
   display: grid;
-  grid-template-columns: 96px 40px 1fr auto;
+  grid-template-columns: 112px 40px 1fr auto;
   gap: 14px;
   align-items: start;
   padding: 18px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.timeline-row .time {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 
 .timeline-row h4 {
@@ -1177,6 +1185,7 @@ main {
   font-size: 12px;
   font-weight: 900;
   line-height: 1.35;
+  white-space: nowrap;
 }
 
 .mobile-timeline-row h4 {
