@@ -378,6 +378,7 @@ main {
   padding: 12px 34px 28px;
   font-size: 17px;
   line-height: 1.7;
+  white-space: pre-line;
 }
 
 .day-map-frame {
@@ -1143,6 +1144,7 @@ main {
   margin: 0;
   font-size: 15px;
   line-height: 1.6;
+  white-space: pre-line;
 }
 
 .m-block {

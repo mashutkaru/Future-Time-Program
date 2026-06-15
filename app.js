@@ -140,6 +140,8 @@ const days = [
     title: "Minato ward visits",
     city: "Minato, Tokyo",
     theme: "Preventive care, LTC systems, lunch in Ginza, TMG visit, and Takanawa Gateway.",
+    notesExtra:
+      "Please note: Dinner is not included on this day. Participants are kindly asked to make their own dinner arrangements for the evening.",
     tip: "Observe how prevention and long-term care systems connect at the municipal level.",
     items: [
       ["PREVENTIVE CENTER", "Rakuccha — multi-generational community center.", ICONS.medical],
@@ -165,6 +167,8 @@ const days = [
     city: "Saitama City",
     theme:
       "Prevention, community welfare volunteers, and integrated care — plus Asoka-en elderly living services.",
+    notesExtra:
+      "Please note: Dinner is not included on this day. Participants are kindly asked to make their own dinner arrangements for the evening.",
     tip: "Arrive prepared with your notebook, questions, and headset.",
     items: [
       ["SAITAMA CITY", "Presentation on regional comprehensive care.", ICONS.presentation],
@@ -187,6 +191,8 @@ const days = [
     title: "Free day in Tokyo",
     city: "Tokyo",
     theme: "A free day at leisure, with an optional evening cultural tour by public transport.",
+    notesExtra:
+      "Please note: Dinner is not included on this day. Participants are kindly asked to make their own dinner arrangements for the evening.",
     tip: "Evening tour is optional. The group will travel by public transport — wear comfortable shoes and bring water.",
     items: [
       ["FREE DAY", "Day at leisure.", ICONS.leisure],
@@ -241,6 +247,8 @@ const days = [
     title: "Saitama care visits",
     city: "Saitama City",
     theme: "BABA Lab, dementia-friendly services, and community care visits in Saitama.",
+    notesExtra:
+      "Please note: Dinner is not included on this day. Participants are kindly asked to make their own dinner arrangements for the evening.",
     tip: "Look for the bridge between institution, home and community.",
     items: [
       ["BABA LAB", "Innovation lab visit (3 groups).", ICONS.innovation],
@@ -628,6 +636,10 @@ function renderScheduleEntry(entry, { mobile = false } = {}) {
   `;
 }
 
+function getDayNotes(day) {
+  return day.notesExtra ? `${day.theme}\n\n${day.notesExtra}` : day.theme;
+}
+
 function renderDesktopDay(day) {
   byId("sideDay").textContent = `DAY ${currentDayIndex + 1}`;
   byId("sideDate").textContent = `${formatWeekday(day.w)}, ${day.d}`;
@@ -636,7 +648,7 @@ function renderDesktopDay(day) {
   byId("tipText").textContent = day.tip;
   byId("dayLocation").textContent = day.city;
   renderDayMap("dayLocationMap", day);
-  byId("dayNotes").textContent = day.theme;
+  byId("dayNotes").textContent = getDayNotes(day);
 
   const photoEl = byId("dayPhoto");
   const overviewEl = photoEl.closest(".overview");
@@ -725,7 +737,7 @@ function renderMobileDay(day) {
 
   byId("mLocation").textContent = day.city;
   renderDayMap("mLocationMap", day);
-  byId("mNotes").textContent = day.theme;
+  byId("mNotes").textContent = getDayNotes(day);
   byId("mTip").textContent = day.tip;
 
   scrollMobileDateIntoView();
