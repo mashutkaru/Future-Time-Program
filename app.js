@@ -546,15 +546,28 @@ function splitSchedulePlan(plan) {
 const invitationAspectRatio = 297 / 210;
 
 function renderScheduleEmbedUrl(src) {
-  return src.includes("#") ? src : `${src}#toolbar=0&navpanes=0&page=1&view=FitH`;
+  const params = "toolbar=0&navpanes=0&page=1&view=FitH";
+  return src.includes("#") ? src : `${src}#${params}`;
+}
+
+function resetScheduleEmbedFrame(iframe) {
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.transform = "";
+  iframe.style.transformOrigin = "";
 }
 
 function resizeScheduleEmbeds() {
   document.querySelectorAll(".timeline-plan-embed").forEach((embed) => {
+    const iframe = embed.querySelector("iframe");
     const width = embed.clientWidth;
     if (!width) return;
 
-    embed.style.height = `${Math.round(width * invitationAspectRatio)}px`;
+    const isMobile = embed.classList.contains("timeline-plan-embed--mobile");
+    const aspectRatio = isMobile ? invitationAspectRatio * 0.985 : invitationAspectRatio;
+
+    embed.style.height = `${Math.round(width * aspectRatio)}px`;
+    if (iframe) resetScheduleEmbedFrame(iframe);
   });
 }
 
@@ -565,7 +578,7 @@ function bindScheduleEmbedResize() {
   });
 }
 
-function renderSchedulePlanBlock(plan) {
+function renderSchedulePlanBlock(plan, { mobile = false } = {}) {
   const { rows, embeds } = splitSchedulePlan(plan);
   if (!rows.length && !embeds.length) return "";
 
@@ -586,7 +599,7 @@ function renderSchedulePlanBlock(plan) {
   const embedHtml = embeds
     .map(
       (item) => `
-        <div class="timeline-plan-embed">
+        <div class="timeline-plan-embed${mobile ? " timeline-plan-embed--mobile" : ""}">
           <iframe src="${renderScheduleEmbedUrl(item.embed)}" title="${item.title || "Invitation"}" loading="lazy"></iframe>
         </div>
       `
@@ -604,7 +617,7 @@ function renderScheduleBadge(link) {
 
 function renderScheduleEntry(entry, { mobile = false } = {}) {
   const [time, title, label, plan, link] = entry;
-  const planHtml = renderSchedulePlanBlock(plan);
+  const planHtml = renderSchedulePlanBlock(plan, { mobile });
   const groupClass = planHtml ? " timeline-row--group" : "";
   const badgeHtml = renderScheduleBadge(link);
 

@@ -665,6 +665,29 @@ main {
   border: 0;
 }
 
+@media (max-width: 1050px) {
+  .timeline-plan:has(.timeline-plan-embed--mobile) {
+    gap: 0;
+    padding-bottom: 0;
+  }
+
+  .timeline-plan-embed--mobile {
+    overflow: hidden;
+    margin-top: 4px;
+    background: #fff;
+    border: 0;
+    border-radius: 12px;
+  }
+
+  .timeline-plan-embed--mobile iframe {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    height: 100%;
+  }
+}
+
 .badge {
   padding: 6px 10px;
   color: var(--navy);
