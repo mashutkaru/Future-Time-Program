@@ -91,6 +91,7 @@ const ICONS = {
 };
 
 const finalEventInvitation = "./assets/AgetechVol2_saveTheDate.pdf";
+const finalEventInvitationImage = "./assets/AgetechVol2_saveTheDate.png";
 
 const days = [
   {
@@ -281,7 +282,32 @@ const days = [
     ],
     program: [
       ["08:00–08:30", "Parliament House", "Entry process"],
-      ["08:30–11:30", "Dialogue with government officials", "Policy discussion"],
+      [
+        "08:30–11:30",
+        "Dialogue with government officials",
+        "Policy dialogue session",
+        [
+          ["::", "Policy Dialogue Session Overview", "This session is intended as a platform for comparative policy dialogue and mutual learning between Japanese and Israeli participants on the challenges and opportunities of a super-aging society."],
+          ["08:30–08:40", "Opening Remarks and Introduction (10 min)", "Israeli Side:"],
+          [
+            "08:40–09:10",
+            "Keynote lecture (30 min)",
+            "Proposed Theme:<br>“Policy Design and Governance Challenges in a Super-Aging Society”",
+          ],
+          [
+            "09:15–09:55",
+            "Panel 1: Governance, Policy Coordination, and Workforce Challenges (40 min)",
+            "Japan–Israel Comparative Policy Dialogue<br><br>Japanese Side (Proposed):<br>• Council for Measures for a Declining Birthrate and Aging Society / Cabinet Office (TBC)<br>• Ministry of Economy, Trade and Industry (METI) — Commerce and Service Industry Policy Group",
+          ],
+          ["09:55–10:05", "Coffee Break", "10 min"],
+          [
+            "10:10–10:45",
+            "Panel 2: Prevention, Independence Support, and Care Models (35 min)",
+            "Japan–Israel Comparative Policy Dialogue<br><br>Japanese Side (Proposed):<br>• Ministry of Health, Labour and Welfare (MHLW) — Long-Term Care Insurance Bureau<br>• Community Development Promotion Office<br><br>Topics:<br>• Preventive Care<br>• Long-Term Care and Elderly Welfare<br>• Community-Based Support Systems",
+          ],
+          ["10:50–11:25", "Q&A and a Panel Session", ""],
+        ],
+      ],
       ["12:00–13:15", "Lunch", "TBC"],
       ["14:30–16:30", "Zenkou Research Institute (Care Tech Lab)", "Geriatrics, rehabilitation & innovation"],
       [
@@ -543,10 +569,10 @@ function splitSchedulePlan(plan) {
   };
 }
 
-const invitationAspectRatio = 297 / 210;
+const invitationAspectRatio = 4416 / 1920;
 
 function renderScheduleEmbedUrl(src) {
-  const params = "toolbar=0&navpanes=0&page=1&view=FitH";
+  const params = "toolbar=0&navpanes=0&page=1&view=Fit";
   return src.includes("#") ? src : `${src}#${params}`;
 }
 
@@ -559,14 +585,16 @@ function resetScheduleEmbedFrame(iframe) {
 
 function resizeScheduleEmbeds() {
   document.querySelectorAll(".timeline-plan-embed").forEach((embed) => {
+    if (embed.classList.contains("timeline-plan-embed--mobile")) {
+      embed.style.height = "";
+      return;
+    }
+
     const iframe = embed.querySelector("iframe");
     const width = embed.clientWidth;
     if (!width) return;
 
-    const isMobile = embed.classList.contains("timeline-plan-embed--mobile");
-    const aspectRatio = isMobile ? invitationAspectRatio * 0.985 : invitationAspectRatio;
-
-    embed.style.height = `${Math.round(width * aspectRatio)}px`;
+    embed.style.height = `${Math.round(width * invitationAspectRatio)}px`;
     if (iframe) resetScheduleEmbedFrame(iframe);
   });
 }
@@ -583,27 +611,59 @@ function renderSchedulePlanBlock(plan, { mobile = false } = {}) {
   if (!rows.length && !embeds.length) return "";
 
   const rowHtml = rows
-    .map(
-      ([time, title, label]) => `
+    .map((row) => {
+      const [time, title, label] = row;
+
+      if (time === "::") {
+        return `
+          <div class="timeline-plan-subhead">
+            <strong>${title}</strong>
+            ${label ? `<p>${label}</p>` : ""}
+          </div>
+        `;
+      }
+
+      if (!time) {
+        return `
+          <div class="timeline-plan-row timeline-plan-row--meta">
+            <div class="timeline-plan-body">
+              <strong>${title}</strong>
+              <p>${label}</p>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
         <div class="timeline-plan-row">
           <div class="timeline-plan-time">${time}</div>
           <div class="timeline-plan-body">
             <strong>${title}</strong>
-            <p>${label}</p>
+            ${label ? `<p>${label}</p>` : ""}
           </div>
         </div>
-      `
-    )
+      `;
+    })
     .join("");
 
   const embedHtml = embeds
-    .map(
-      (item) => `
-        <div class="timeline-plan-embed${mobile ? " timeline-plan-embed--mobile" : ""}">
+    .map((item) => {
+      if (mobile) {
+        return `
+          <div class="timeline-plan-embed timeline-plan-embed--mobile">
+            <a class="timeline-plan-invitation-link" href="${item.embed}" target="_blank" rel="noopener noreferrer">
+              <img src="${finalEventInvitationImage}" alt="${item.title || "Invitation"}" loading="lazy">
+            </a>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="timeline-plan-embed">
           <iframe src="${renderScheduleEmbedUrl(item.embed)}" title="${item.title || "Invitation"}" loading="lazy"></iframe>
         </div>
-      `
-    )
+      `;
+    })
     .join("");
 
   return `<div class="timeline-plan">${rowHtml}${embedHtml}</div>`;
