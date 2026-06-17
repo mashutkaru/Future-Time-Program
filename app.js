@@ -182,7 +182,6 @@ const days = [
       ["Morning", "Saitama City", "Presentation / discussion — regional welfare volunteers (地域の民生委員・児童委員協議会) & comprehensive care system (いきいき埼玉市役所, Omiya Ward Office)"],
       ["12:15–13:00", "Lunch", "Obento"],
       ["13:20–16:00", "Asoka-en Elderly Living Service Center", "Care management — integrated elderly care facility visit"],
-      ["16:00–17:30", "Return to Tokyo", "Saitama → Shinagawa Prince Hotel"],
     ],
   },
   {
