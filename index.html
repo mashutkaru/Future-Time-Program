@@ -41,7 +41,7 @@
   />
   <link rel="icon" href="./assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="./assets/favicon.png" />
-  <link rel="stylesheet" href="./styles.css?v=31" />
+  <link rel="stylesheet" href="./styles.css?v=36" />
 </head>
 <body>
   <div class="app">
@@ -57,6 +57,11 @@
           <button data-page="avoid">What to avoid</button>
           <button data-page="contact">Contact</button>
         </nav>
+
+        <div class="topbar-partners" aria-label="Partners">
+          <img class="partner-logo partner-logo--ijac" src="./assets/IJAC_white_logo.png" alt="IJAC" />
+          <img class="partner-logo partner-logo--jiat" src="./assets/JIAT_white_letters.png" alt="Japan-Israel AgeTech" />
+        </div>
       </div>
     </header>
 
@@ -132,10 +137,16 @@
           <div class="mobile-app">
             <div class="m-chrome">
               <header class="m-head">
-                <img class="brand-logo brand-logo--compact" src="./assets/logo-english.png" alt="Future Time Program" />
+                <div class="m-head-side m-head-side--start">
+                  <img class="brand-logo brand-logo--compact" src="./assets/logo-english.png" alt="Future Time Program" />
+                </div>
                 <div class="m-head-center">
                   <strong id="mHeadDay">DAY 1</strong>
                   <span id="mHeadDate">Tue, 7.7</span>
+                </div>
+                <div class="m-head-side m-head-side--end m-head-partners" aria-label="Partners">
+                  <img class="partner-logo partner-logo--ijac" src="./assets/IJAC_white_logo.png" alt="IJAC" />
+                  <img class="partner-logo partner-logo--jiat" src="./assets/JIAT_white_letters.png" alt="Japan-Israel AgeTech" />
                 </div>
               </header>
 
