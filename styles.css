@@ -1227,16 +1227,7 @@ main {
 .m-section-tabs .m-tab-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #ffffff;
-  background: linear-gradient(180deg, #2e9e5b 0%, #1f7d46 100%);
-  border-color: transparent;
   text-decoration: none;
-}
-
-.m-section-tabs .m-tab-link::before {
-  content: "🏪";
-  font-size: 14px;
 }
 
 .m-section-tabs button.active {
