@@ -1209,7 +1209,8 @@ main {
   display: none;
 }
 
-.m-section-tabs button {
+.m-section-tabs button,
+.m-section-tabs .m-tab-link {
   flex: 0 0 auto;
   height: 36px;
   padding: 0 14px;
@@ -1221,6 +1222,21 @@ main {
   border: 1px solid rgba(33, 79, 99, 0.12);
   border-radius: 999px;
   box-shadow: 0 2px 8px rgba(33, 79, 99, 0.06);
+}
+
+.m-section-tabs .m-tab-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+  background: linear-gradient(180deg, #2e9e5b 0%, #1f7d46 100%);
+  border-color: transparent;
+  text-decoration: none;
+}
+
+.m-section-tabs .m-tab-link::before {
+  content: "🏪";
+  font-size: 14px;
 }
 
 .m-section-tabs button.active {
